@@ -1,0 +1,87 @@
+
+.cad-area{
+  background-color: rgb(66, 100, 206);
+  width: 90%;
+  margin: 50px;
+  border-radius: 5px;
+}
+
+.campos-cadastro{
+  margin: 10px;
+  background-color: rgb(255, 145, 35);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.cad-titulo{
+  font-size: 50px;
+  color: #FFFF;
+  margin-bottom: 30px;
+}
+
+.cad-sub-titulo{
+  font-size: 30px;
+  color: #FFFF;
+  margin-bottom: 15px;
+}
+
+.cadastro input, select{
+  /* margin-bottom: 1em; */
+  /* padding: .7em; */
+  border: 0;
+  border-radius: 5px;
+  /* max-width: 600px; */
+  /* background-color: #FFFF; */
+}
+.formCadastro input:disabled{
+  cursor: not-allowed;
+}
+
+.formCadastro label{
+  margin-bottom: .5em;
+  font-size: 1em;
+}
+
+.div-cadastro-btn{
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.cadastro-btn{
+  height: 40px;
+  width: 75%;
+  border: 0;
+  border-radius: 5px;
+  background-color: rgb(255, 145, 35);
+  font-size: 18px;
+  color: #FFFF ;
+  justify-content: center;
+  align-items: center;
+}
+
+.genero-field{
+  display: flex;
+  align-items:baseline;
+}
+
+.genero-field span{
+  margin-left: 5px;
+}
+
+.calc-btn{
+  border: 0;
+  border-radius: 5px;
+  background-color: rgb(66, 100, 206);
+  padding: 2.5px;
+  font-size: 14px;
+  color: #FFFF ;
+}
+
+.observacao-field{
+  resize: none;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}

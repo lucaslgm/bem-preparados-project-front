@@ -1,0 +1,25 @@
+header {
+  margin: 0;
+  padding-top: 5px;
+  display: flex;
+  justify-content:space-between;
+  /* background-color: rgb(66, 100, 206); */
+  background-color: #2C2D31;
+  /* height: 100%; */
+  overflow: auto;
+}
+
+.logo{
+  display: inline-block;
+  margin: 5px;
+  width: 200px;
+  /* height: 30px; */
+}
+
+.links{
+  display:inline-block;
+  margin: 5px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  align-items: center;
+}

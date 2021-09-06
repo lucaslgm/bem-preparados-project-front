@@ -1,0 +1,9 @@
+.flex-column-container{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.paddin-20{
+  padding-bottom: 20px;
+}
