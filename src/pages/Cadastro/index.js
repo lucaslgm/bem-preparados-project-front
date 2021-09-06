@@ -31,7 +31,6 @@ const Index = () => {
   const [update, setUpdate] = React.useState(false);
   const [listaConveniadas, setListaConveniadas] = React.useState([]);
   const [listaSituacao, setListaSituacao] = React.useState([]);
-  const [aux, setAux] = React.useState();
 
   React.useEffect(() => {
     async function loadData() {
@@ -47,7 +46,6 @@ const Index = () => {
       // GET LISTA CONVENIADAS
       api.get('affiliated/get-all')
         .then((response) => {
-          console.log(response)
           let lista = [];
           response.data.forEach((item) => {
             lista.push({
@@ -103,21 +101,17 @@ const Index = () => {
     }
   }, [update]);
 
-  React.useEffect(() => { console.log(form) }, [aux])
-
   function removedots() {
     setForm((form) => ({ ...form, cpf: form.cpf.replaceAll(/[^\d]/g, '') }));
     setForm((form) => ({ ...form, cep: form.cep.replaceAll(/[^\d]/g, '') }));
     setForm((form) => ({ ...form, vlr_solicitado: form.vlr_solicitado.replace(',', '.') }));
     setForm((form) => ({ ...form, vlr_salario: form.vlr_salario.replace(',', '.') }));
-    setAux('x');
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     setForm((form) => ({ ...form, usuario: user.username }));
-    removedots();
-    console.log(form);
+    // removedots();
 
     api.post('form/insert', form)
       .then((response) => {
@@ -141,9 +135,7 @@ const Index = () => {
 
   async function handleUpdate() {
     setForm((form) => ({ ...form, usuario: user.username }));
-    removedots();
-
-    console.log(form);
+    // removedots();
 
     await api.put('form/update/1', form)
       .then((response) => {
@@ -180,7 +172,6 @@ const Index = () => {
           setForm((form) => ({ ...form, logradouro: data.logradouro }));
           setForm((form) => ({ ...form, bairro: data.bairro }));
           setForm((form) => ({ ...form, cidade: data.localidade }));
-          console.log(form)
 
           document.getElementById('numero_residencia').focus();
           toast('Insira o número do endereço', {
@@ -216,7 +207,6 @@ const Index = () => {
   async function buscarCliente(e) {
     await e.preventDefault();
     // resetForm();
-    console.log(e.target.value)
 
     await api.get(`form/get-by-client?cpf=${e.target.value}`)
       .then((response) => {
@@ -270,14 +260,12 @@ const Index = () => {
           setForm((form) => ({ ...form, observacao: proposta.observacao != null ? proposta.observacao : '' }));
 
           setUpdate(true);
-          console.log(update)
         }
       })
       .catch((error) => {
         let ano = new Date().getFullYear();
         let mes = (new Date().getMonth() + 1).toString().padStart(2, '0');
         let dia = new Date().getDate().toString().padStart(2, '0');
-        console.log(`${ano}-${mes}-${dia}`)
         setForm((form) => ({ ...form, dtSituacao: `${ano}-${mes}-${dia}` }));
 
         setForm((form) => ({ ...form, situacao: 'AG' }));
@@ -294,9 +282,8 @@ const Index = () => {
     await api.get(`form/get-financed-amount?vlrSolicitado=${form.vlr_solicitado.replace(',', '.')}&prazo=${form.prazo}`)
       .then((response) => {
         if (response) {
-          let result = response.data.result;
+          let result = response.data;
           let valor = result.toLocaleString('pt-br', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-          console.log(result)
           valor = valor.replaceAll('.', '').replace(',', '.');
           setForm((form) => ({ ...form, vlr_financiado: valor }));
         }
@@ -318,10 +305,6 @@ const Index = () => {
   };
 
   function mascaraNumero(mascaraInput) {
-    let valor = document.getElementById(`${mascaraInput}`).value.replace(/([^0-9])+/g, "");
-    document.getElementById(`${mascaraInput}`).value = valor;
-  };
-  function mascaraPrazo(mascaraInput) {
     let valor = document.getElementById(`${mascaraInput}`).value.replace(/([^0-9])+/g, "");
     document.getElementById(`${mascaraInput}`).value = valor;
   };
